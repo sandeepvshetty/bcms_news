@@ -7,10 +7,10 @@ class RecentNewsPortlet < Portlet
     end
 
     if @portlet.category_id.blank?
-      @articles = NewsArticle.all(:order => order, :limit => @portlet.limit)
+      @articles = NewsArticle.all.paginate(:page => params[:page], :per_page => @portlet.limit,:order => order)
     else
       @category = Category.find(@portlet.category_id)
-      @articles = NewsArticle.all(:conditions => ["category_id = ?", @category.id], :order => order, :limit => @portlet.limit)
+      @articles = NewsArticle.all.paginate(:page => params[:page], :per_page => @portlet.limit,:conditions => ["category_id = ?", @category.id], :order => order)
     end
   end
     

@@ -17,6 +17,8 @@
   </div>
 <% end %>
 
+<%= will_paginate @articles %>
+
 <% unless @portlet.more_link.blank? -%>
   <div class="news-item-browser">
     <%= link_to "MORE", @portlet.more_link %>
